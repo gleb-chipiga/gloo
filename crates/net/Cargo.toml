@@ -88,5 +88,6 @@ eventsource = [
     'web-sys/Event',
     'web-sys/EventTarget',
     'web-sys/EventSource',
+    'web-sys/EventSourceInit',
     'web-sys/MessageEvent',
 ]

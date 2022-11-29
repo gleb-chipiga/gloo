@@ -101,6 +101,25 @@ impl EventSource {
         Ok(Self { es })
     }
 
+    /// Establish an EventSource.
+    ///
+    /// This function may error in the following cases:
+    /// - The connection url is invalid
+    ///
+    /// The error returned is [`JsError`]. See the
+    /// [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/EventSource/EventSource#exceptions_thrown)
+    /// to learn more.
+    pub fn new_with_credentials(
+        url: &str
+    ) -> Result<Self, JsError> {
+        let es = web_sys::EventSource::new_with_event_source_init_dict(
+            url,
+            &web_sys::EventSourceInit::new().with_credentials(true)
+        ).map_err(js_to_js_error)?;
+
+        Ok(Self { es })
+    }
+
     /// Subscribes to listening for a specific type of event.
     ///
     /// All events for this type are streamed back given the subscription
